@@ -1,0 +1,32 @@
+<meta charset="UTF-8">
+
+<script>
+  'use strict';
+
+  let amountOfMoney = +prompt('Сколько денег вы хотите положить в банк?');
+  alert(`Ваша сумма в ${amountOfMoney} ${choiceWord()} успешно зачислена.`);
+
+  /**
+   * Функция выбора нужной формы склонения слова "рубль"
+   * @param {number} num На вход даётся число, которое вводит пользователь через "prompt"
+   * @returns {string} На выходе получаем строку с верным склонением слова "рубль"
+   */
+  function choiceWord(num) {
+      let wordForm1 = 'рубль';
+      let wordForm2 = 'рубля';
+      let wordForm3 = 'рублей';
+      num = amountOfMoney % 100;
+      let num1 = num % 10;
+      if(num > 10 && num < 20) {
+          return wordForm3;
+      }
+      if(num1 === 1) {
+          return wordForm1;
+      }
+      if(num1 > 1 && num1 < 5) {
+          return wordForm2;
+      }
+      return wordForm3;
+  }
+
+</script>
