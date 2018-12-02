@@ -1,0 +1,24 @@
+<meta charset="UTF-8">
+<script>
+  'use strict';
+
+  /**
+   * Функция разбивает число по разрядам и возвращает объект с записанными разрядами числа.
+   * @param {Number}num Целое положительное число [0; 999]
+   * @return {Object} Путой объект, если не num
+   * @return {Object} Объект с опреденными свойствами: единицы (в свойстве firstDigit),
+   * десятки (в свойстве secondDigit), сотни (в свойстве thirdDigit)
+   */
+  function getDigitsOfNumber(num) {
+    if (Number.isInteger(num) === false || num < 0 || num >= 1000) {
+      return console.log({});
+    } else {
+      return console.log({
+        firstDigit: num % 10,
+        secondDigit: Math.trunc(num % 100 / 10),
+        thirdDigit: Math.trunc(num / 100),
+      });
+    }
+  }
+getDigitsOfNumber(12);
+</script>
