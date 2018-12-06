@@ -21,19 +21,20 @@ const chess = {
           tr.appendChild(td);
 
           if ((row === 0 || row === rows.length - 1) && cols[col] !== 0) {
-              td.innerText = cols[col];
+            td.innerText = cols[col];
           }
 
           if ((col === 0 || col === cols.length - 1) && rows[row] !== 0) {
-              td.innerText = rows[row];
+            td.innerText = rows[row];
           }
 
           if (this.isCellIsBlack(row, col) && rows[row] !== 0 && cols[col] !== 0) {
-              td.style.backgroundColor = 'grey';
+            td.style.backgroundColor = 'grey';
           }
       }
     }
   },
+
   /**
    * Определяет является ли ячейка черной.
    * @param {int} rowNum Номер в строке.
@@ -41,9 +42,9 @@ const chess = {
    * @returns {boolean} true, если ячейка должна быть черной, иначе false.
    */
   isCellIsBlack(rowNum, colNum) {
-      if ((rowNum % 2 === 0 && colNum % 2 === 0) || (rowNum % 2 !== 0 && colNum % 2 !== 0)) {
-          return false;
-      } else return true;
+    if ((rowNum % 2 === 0 && colNum % 2 === 0) || (rowNum % 2 !== 0 && colNum % 2 !== 0)) {
+      return false;
+    } else return true;
 
   },
 };
