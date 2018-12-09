@@ -17,10 +17,17 @@ const basket = {
   init() {
     this.countEl = document.querySelector('#basket-count');
     this.priceEl = document.querySelector('#basket-price');
+
     const buttons = document.querySelectorAll('.buy-btn');
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', event => this.add(event.target.dataset.name, +event.target.dataset.price));
     }
+    /*
+    const buttons = document.querySelector('#container');
+    buttons.addEventListener('click', event => this.add(event.target.dataset.name, +event.target.dataset.price));
+    console.log(event.target);
+    Не понял куда проверку вставлять.
+    */
   },
 
   /**
