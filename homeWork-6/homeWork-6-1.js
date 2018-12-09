@@ -18,7 +18,13 @@ const gallery = {
     openedImageCloseBtnClass: 'galleryWrapper__close',
     openedImageCloseBtnSrc: 'images/gallery/close.png',
     openedImageBungSrc: 'images/gallery/no_image.png',
+    openedImageBackBtnClass: 'galleryWrapper__back',
+    openedImageNextBtnClass: 'galleryWrapper__next',
+    openedImageBackBtnSrc: 'images/gallery/back.png',
+    openedImageNextBtnSrc: 'images/gallery/next.png',
   },
+
+  openedImageEl: '',
 
   /**
    * Инициализирует галерею, ставит обработчик события.
@@ -48,6 +54,8 @@ const gallery = {
     }
     // Открываем картинку с полученным из целевого тега (data-full_image_url аттрибут).
     this.openImage(event.target.dataset.full_image_url);
+
+    this.openedImageEl = event.target;
   },
 
   /**
@@ -58,6 +66,34 @@ const gallery = {
     // Получаем контейнер для открытой картинки, в нем находим тег img и ставим ему нужный src.
 
     this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`).src = src;
+  },
+
+  /**
+   * Возвращает следующий элемент (картинку) от открытой или первую картинку в контейнере,
+   * если текущая открытая картинка последняя.
+   * @returns {String} Следующую картинку от текущей открытой.
+   */
+  getNextImage() {
+    this.openedImageEl = this.openedImageEl.nextElementSibling;
+    if (this.openedImageEl === null) {
+      this.openedImageEl = document.querySelector(this.settings.previewSelector).firstElementChild;
+    }
+    return this.openedImageEl.dataset.full_image_url;
+    // Если элемент справа есть, его и возвращаем, если нет, то берем первый элемент в контейнере миниатюр.
+  },
+
+  /**
+   * Возвращает предыдущий элемент (картинку) от открытой или последнюю картинку в контейнере,
+   * если текущая открытая картинка первая.
+   * @returns {String} Предыдущую картинку от текущей открытой.
+   */
+  getPrevImage() {
+    this.openedImageEl = this.openedImageEl.previousElementSibling;
+    if (this.openedImageEl === null) {
+      this.openedImageEl = document.querySelector(this.settings.previewSelector).lastElementChild;
+    }
+    return this.openedImageEl.dataset.full_image_url;
+    // Если элемент слева есть, его и возвращаем, если нет, то берем последний элемент в контейнере миниатюр.
   },
 
   /**
@@ -102,6 +138,20 @@ const gallery = {
     image.classList.add(this.settings.openedImageClass);
     galleryWrapperElement.appendChild(image);
     image.onerror = () => image.src = this.settings.openedImageBungSrc;
+
+    // Создаём картинку "назад", ставим класс и добавляем её в контейнер-обертку.
+    const backImageElement = new Image();
+    backImageElement.classList.add(this.settings.openedImageBackBtnClass);
+    backImageElement.src = this.settings.openedImageBackBtnSrc;
+    backImageElement.addEventListener('click', () => this.openImage(this.getPrevImage()));
+    galleryWrapperElement.appendChild(backImageElement);
+
+    // Создаём картинку "вперёд", ставим класс и добавляем её в контейнер-обертку.
+    const nextImageElement = new Image();
+    nextImageElement.classList.add(this.settings.openedImageNextBtnClass);
+    nextImageElement.src = this.settings.openedImageNextBtnSrc;
+    nextImageElement.addEventListener('click', () => this.openImage(this.getNextImage()));
+    galleryWrapperElement.appendChild(nextImageElement);
 
     // Добавляем контейнер-обертку в тег body.
     document.body.appendChild(galleryWrapperElement);

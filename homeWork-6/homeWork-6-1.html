@@ -33,6 +33,18 @@
       top: 0;
       right: 0;
     }
+    .galleryWrapper__next {
+      z-index: 101;
+      position: absolute;
+      top: 50%;
+      right: 0;
+    }
+    .galleryWrapper__back {
+      z-index: 101;
+      position: absolute;
+      top: 50%;
+      left: 0;
+    }
   </style>
 </head>
 <body>
@@ -44,6 +56,8 @@
 </div>
 <!--
 <div class="galleryWrapper">
+  <img class="galleryWrapper__back" src="images/gallery/back.png" alt="Назад">
+  <img class="galleryWrapper__next" src="images/gallery/next.png" alt="Вперед">
   <div class="galleryWrapper__screen"></div>
   <img class="galleryWrapper__close" src="images/gallery/close.png" alt="">
   <img class="galleryWrapper__image" src="images/max/1.jpg" alt="">
